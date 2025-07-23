@@ -59,7 +59,7 @@ const cars: Car[] = [
 function getCarMake(car: Car): string {
   // write your code here...
 
-  return ""; // replace empty string with what you see is fit
+  return car.make; // replace empty string with what you see is fit
 }
 
 /**
@@ -73,6 +73,9 @@ function getCarMake(car: Car): string {
  */
 function isCarColorMatching(car: Car, color: string): boolean {
   // write your code here...
+  if (car.color === color) {
+    return true; // replace true with what you see is fit
+  }
 
   return false; // replace false with what you see is fit
 }
@@ -105,8 +108,11 @@ function addCar(
   color: string
 ): Car[] {
   // write your code here...
+  const newcar = { id, model, make, year, color };
 
-  return []; // replace empty array with what you see is fit
+  cars.push(newcar);
+
+  return cars; // replace empty array with what you see is fit
 }
 
 /**
@@ -120,8 +126,16 @@ function addCar(
  */
 function countCarsMadeInYear(cars: Car[], year: number): number {
   // write your code here...
+  // let count = 0;
+  // cars.forEach((car) => {
+  //   if (car.year === year) {
+  //     count++;
+  //   }
+  // });
 
-  return Infinity; // replace Infinity with what you see is fit
+  // return count; // replace Infinity with what you see is fit
+
+  return cars.filter((car) => car.year === year).length; // alternative solution
 }
 
 /**
@@ -137,9 +151,10 @@ function countCarsMadeInYear(cars: Car[], year: number): number {
  */
 function removeCarById(cars: Car[], id: number): Car[] {
   // write your code here...
-
-  return []; // replace empty array with what you see is fit
+  const newArr = cars.filter((car) => car.id !== id);
+  return newArr;
 }
+console.log(removeCarById(cars, 403)); // Example usage to test the function
 
 /**
  * `updateCarColor` function:
@@ -162,9 +177,16 @@ function updateCarColor(
   newColor: string
 ): Car | "No Car Found" {
   // write your code here...
+  const carToUpdate = cars.find((car) => car.id === id);
+  if (carToUpdate) {
+    carToUpdate.color = newColor;
+    return carToUpdate; // replace empty object with what you see is fit
+  }
+  
 
   return "No Car Found"; // replace "No Car Found" with what you see is fit
 }
+ 
 
 export {
   Car,
